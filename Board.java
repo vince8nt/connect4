@@ -1,0 +1,98 @@
+
+public class Board
+{
+	private int pieces[][];
+	
+	public Board()
+	{
+		pieces = new int[7][6];
+		for(int i = 0; i < 7; i++)
+		{
+			for(int j = 0; j < 6; j++)
+			{
+				pieces[i][j] = 0;
+			}
+		}
+	}
+	
+	public String toString()
+	{
+		String s  = " ";
+		for (int i = 0; i < 7; i++)
+		{
+			s += (i + 1);
+		}
+		s += "\n+-------+\n";
+		for(int i = 0; i < 6; i++)
+		{
+			s += "|";
+			for(int j = 0; j < 7; j++)
+			{
+				if(pieces[j][i] == 0)
+					s += " ";
+				else if(pieces[j][i] == 1)
+					s += "O";
+				else
+					s += "X";
+			}
+			s += "|\n";
+		}
+		s += "+-------+";
+		return(s);
+	}
+	
+	public boolean equals(Board comp)
+	{
+		return(this.pieces.equals(comp.pieces));
+	}
+	
+	public void drop(int color, int col)
+	{
+		if(color < 1 || color > 2)
+		{
+			throw new RuntimeException("undefined piece");
+		}
+		if(col < 0 || col > 6)
+		{
+			throw new RuntimeException("column out of bounds");
+		}
+		if(colFull(col))
+		{
+			throw new RuntimeException("column full");
+		}
+		
+		int depth = 0;
+		while(depth != 5 && this.pieces[col][depth + 1] == 0)
+		{
+			depth++;
+		}
+		this.pieces[col][depth] = color;
+	}
+	
+	public boolean colFull(int col)
+	{
+		if(col < 0 || col > 6)
+		{
+			throw new RuntimeException("column out of bounds");
+		}
+		if(this.pieces[col][0] == 0)
+			return(false);
+		return(true);
+	}
+	
+	public boolean full()
+	{
+		for(int i = 0; i < 7; i++)
+		{
+			if(!colFull(i))
+				return(false);
+		}
+		return(true);
+	}
+	
+	public boolean win()
+	{
+		// finish this
+		return(false);
+	}
+}
