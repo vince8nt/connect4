@@ -115,6 +115,27 @@ public class Board
 			}
 		}
 		
+		// vertical 4
+				for(int i = 0; i < 7; i++)
+				{
+					color = streak = j = 0;
+					while(j < 6)
+					{
+						if(this.pieces[i][j] == 0)
+							color = streak = 0;
+						else if(this.pieces[i][j] == color)
+							streak++;
+						else
+						{
+							streak = 1;
+							color = this.pieces[i][j];
+						}
+						if(streak == 4)
+							return(true);
+						j++;
+					}
+				}
+		
 		return(false);
 	}
 }
