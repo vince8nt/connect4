@@ -3,6 +3,7 @@ public class Board
 {
 	private int pieces[][];
 	
+	// constructor
 	public Board()
 	{
 		pieces = new int[7][6];
@@ -15,6 +16,7 @@ public class Board
 		}
 	}
 	
+	// override Object's toString
 	public String toString()
 	{
 		String s  = " ";
@@ -41,11 +43,13 @@ public class Board
 		return(s);
 	}
 	
+	// override Object's equals
 	public boolean equals(Board comp)
 	{
 		return(this.pieces.equals(comp.pieces));
 	}
 	
+	// place a piece in specific column
 	public void drop(int color, int col)
 	{
 		if(color < 1 || color > 2)
@@ -69,6 +73,7 @@ public class Board
 		this.pieces[col][depth] = color;
 	}
 	
+	// check to see ic column number col if full
 	public boolean colFull(int col)
 	{
 		if(col < 0 || col > 6)
@@ -80,6 +85,7 @@ public class Board
 		return(true);
 	}
 	
+	// check to see if all the columns are full
 	public boolean full()
 	{
 		for(int i = 0; i < 7; i++)
@@ -90,11 +96,12 @@ public class Board
 		return(true);
 	}
 	
+	// check to see if there is a 4-in-a-row of either color
 	public boolean win()
 	{
 		int color, streak, j;
 		
-		// horizontal 4
+		// horizontal 4?
 		for(int i = 0; i < 6; i++)
 		{
 			color = streak = j = 0;
@@ -115,26 +122,29 @@ public class Board
 			}
 		}
 		
-		// vertical 4
-				for(int i = 0; i < 7; i++)
+		// vertical 4?
+		for(int i = 0; i < 7; i++)
+		{
+			color = streak = j = 0;
+			while(j < 6)
+			{
+				if(this.pieces[i][j] == 0)
+					color = streak = 0;
+				else if(this.pieces[i][j] == color)
+					streak++;
+				else
 				{
-					color = streak = j = 0;
-					while(j < 6)
-					{
-						if(this.pieces[i][j] == 0)
-							color = streak = 0;
-						else if(this.pieces[i][j] == color)
-							streak++;
-						else
-						{
-							streak = 1;
-							color = this.pieces[i][j];
-						}
-						if(streak == 4)
-							return(true);
-						j++;
-					}
+					streak = 1;
+					color = this.pieces[i][j];
 				}
+				if(streak == 4)
+					return(true);
+				j++;
+			}
+		}
+		
+		// diagonal 4?
+		// need to add this
 		
 		return(false);
 	}
