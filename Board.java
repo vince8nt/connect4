@@ -92,7 +92,36 @@ public class Board
 	
 	public boolean win()
 	{
-		// finish this
+		int color, streak, j;
+		
+		// horizontal 4
+		for(int i = 0; i < 6; i++)
+		{
+			color = streak = j = 0;
+			while(j < 7)
+			{
+				if(this.pieces[j][i] == 0)
+					color = streak = 0;
+				else if(this.pieces[j][i] == color)
+					streak++;
+				else
+				{
+					streak = 1;
+					color = this.pieces[j][i];
+				}
+				if(streak == 4)
+					return(true);
+				j++;
+			}
+		}
+		
 		return(false);
 	}
 }
+
+
+
+
+
+
+

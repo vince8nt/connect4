@@ -10,7 +10,7 @@ public class ConnectFour
 		int nextCol;
 		int nextPiece = 1;
 		
-		while(!b.full())
+		while(!b.full() && !b.win())
 		{
 			System.out.println(b);
 			nextCol = 0;
