@@ -143,8 +143,53 @@ public class Board
 			}
 		}
 		
-		// diagonal 4?
-		// need to add this
+		// diagonal (up/right) 4?
+		for(int i = 3; i < 9; ++i) {
+			color = streak = 0;
+			int x = i;
+			if (x > 6) x = 6;
+			int y = i - 6;
+			if (y < 0) y = 0;
+			while(x > -1 && y < 6) {
+				if(this.pieces[x][y] == 0)
+					color = streak = 0;
+				else if(this.pieces[x][y] == color)
+					streak++;
+				else
+				{
+					streak = 1;
+					color = this.pieces[x][y];
+				}
+				if(streak == 4)
+					return(true);
+				--x;
+				++y;
+			}
+		}
+
+		// diagonal (down/left) 4?
+		for(int i = -2; i < 7; ++i) {
+			color = streak = 0;
+			int x = i;
+			if (x <0) x = 0;
+			int y = 0 - x;
+			if (y < 0) y = 0;
+			while(x < 7 && y < 6) {
+				if(this.pieces[x][y] == 0)
+					color = streak = 0;
+				else if(this.pieces[x][y] == color)
+					streak++;
+				else
+				{
+					streak = 1;
+					color = this.pieces[x][y];
+				}
+				if(streak == 4)
+					return(true);
+				++x;
+				++y;
+			}
+		}
 		
 		return(false);
 	}
