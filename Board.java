@@ -22,24 +22,24 @@ public class Board
 		String s  = " ";
 		for (int i = 0; i < 7; i++)
 		{
-			s += (i + 1);
+			s += (" " + (i + 1));
 		}
-		s += "\n+-------+\n";
+		s += "\n+ - - - - - - - +\n";
 		for(int i = 0; i < 6; i++)
 		{
-			s += "|";
+			s += "| ";
 			for(int j = 0; j < 7; j++)
 			{
 				if(pieces[j][i] == 0)
-					s += " ";
+					s += "  ";
 				else if(pieces[j][i] == 1)
-					s += "O";
+					s += "O ";
 				else
-					s += "X";
+					s += "X ";
 			}
 			s += "|\n";
 		}
-		s += "+-------+";
+		s += "+ - - - - - - - +";
 		return(s);
 	}
 	
