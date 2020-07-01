@@ -72,6 +72,23 @@ public class Board
 		}
 		this.pieces[col][depth] = color;
 	}
+
+	public void remove(int col) {
+		if(col < 0 || col > 6)
+		{
+			throw new RuntimeException("column out of bounds");
+		}
+		if(pieces[col][5] == 0) {
+			throw new RuntimeException("column empty");
+		}
+
+		int depth = 0;
+		while(depth != 5 && this.pieces[col][depth + 1] != 0)
+		{
+			depth++;
+		}
+		this.pieces[col][depth] = 0;
+	}
 	
 	// check to see ic column number col if full
 	public boolean colFull(int col)
