@@ -25,7 +25,7 @@ public class ConnectFour
 				}
 				else {
 					// System.out.print("X's turn. what column would you like to drop into?: ");
-					nextCol = BestMove(b, 4) + 1;
+					nextCol = BestMove(b, 6) + 1;
 				}
 			}
 			b.drop(nextPiece, nextCol - 1);
@@ -42,9 +42,9 @@ public class ConnectFour
 		if(b.win())
 		{
 			if(nextPiece == 1)
-				System.out.println("X won!");
+				System.out.println("You lost!");
 			else
-				System.out.println("O won!");
+				System.out.println("You won!");
 		}
 		else
 			System.out.println("It's a tie.");

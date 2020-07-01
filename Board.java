@@ -83,7 +83,7 @@ public class Board
 		}
 
 		int depth = 0;
-		while(depth != 5 && this.pieces[col][depth + 1] != 0)
+		while(depth != 5 && this.pieces[col][depth] == 0)
 		{
 			depth++;
 		}
@@ -160,7 +160,8 @@ public class Board
 			}
 		}
 		
-		// diagonal (up/right) 4?
+		// diagonal (/) 4?
+		/*
 		for(int i = 3; i < 9; ++i) {
 			color = streak = 0;
 			int x = i;
@@ -183,8 +184,11 @@ public class Board
 				++y;
 			}
 		}
+		*/
 
-		// diagonal (down/left) 4?
+
+		// diagonal (\) 4?
+		/*
 		for(int i = -2; i < 7; ++i) {
 			color = streak = 0;
 			int x = i;
@@ -207,6 +211,7 @@ public class Board
 				++y;
 			}
 		}
+		*/
 		
 		return(false);
 	}
