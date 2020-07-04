@@ -160,50 +160,29 @@ public class Board
 			}
 		}
 		
+		int x;
+		int y;
+
 		// diagonal (/) 4?
-		/*
-		for(int i = 3; i < 9; ++i) {
+		for(int i = -2; i < 4; ++i) {
 			color = streak = 0;
-			int x = i;
-			if (x > 6) x = 6;
-			int y = i - 6;
-			if (y < 0) y = 0;
-			while(x > -1 && y < 6) {
-				if(this.pieces[x][y] == 0)
-					color = streak = 0;
-				else if(this.pieces[x][y] == color)
-					streak++;
-				else
-				{
-					streak = 1;
-					color = this.pieces[x][y];
-				}
-				if(streak == 4)
-					return(true);
-				--x;
-				++y;
+			if (i < 0) {
+				x = 0;
+				y = 0 - i;
 			}
-		}
-		*/
-
-
-		// diagonal (\) 4?
-		/*
-		for(int i = -2; i < 7; ++i) {
-			color = streak = 0;
-			int x = i;
-			if (x <0) x = 0;
-			int y = 0 - x;
-			if (y < 0) y = 0;
-			while(x < 7 && y < 6) {
-				if(this.pieces[x][y] == 0)
+			else {
+				x = i;
+				y = 0;
+			}
+			while (x < 7 && y < 6) {
+				if(pieces[x][y] == 0)
 					color = streak = 0;
-				else if(this.pieces[x][y] == color)
+				else if(pieces[x][y] == color)
 					streak++;
 				else
 				{
 					streak = 1;
-					color = this.pieces[x][y];
+					color = pieces[x][y];
 				}
 				if(streak == 4)
 					return(true);
@@ -211,7 +190,34 @@ public class Board
 				++y;
 			}
 		}
-		*/
+
+		// diagonal (\) 4?
+		for(int i = 3; i < 9; ++i) {
+			color = streak = 0;
+			if (i > 6) {
+				x = 6;
+				y = i - 6;
+			}
+			else {
+				x = i;
+				y = 0;
+			}
+			while (x > -1 && y < 6) {
+				if(pieces[x][y] == 0)
+					color = streak = 0;
+				else if(pieces[x][y] == color)
+					streak++;
+				else
+				{
+					streak = 1;
+					color = pieces[x][y];
+				}
+				if(streak == 4)
+					return(true);
+				--x;
+				++y;
+			}
+		}
 		
 		return(false);
 	}

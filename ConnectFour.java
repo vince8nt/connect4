@@ -115,8 +115,8 @@ public class ConnectFour
 			return bestRating;
 		}
 
-		// non-recursive analysis
-		return 0; // needs to be added to, assesses every position as equal.
+		
+		return b.Rating();
 	}
 }
 
