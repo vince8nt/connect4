@@ -215,6 +215,10 @@ public class Board
 		
 		return(false);
 	}
+
+	public double Rating() {
+		return 0;
+	}
 }
 
 
