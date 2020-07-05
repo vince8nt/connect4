@@ -335,16 +335,46 @@ public class Board
 	// ranks a board state non recursively
 	// ranking is dependent on the difference in winning squares
 	public double Rating() {
-		int x = 0, o = 0;
-		for(int i = 0; i < 7; i++) {
-			for(int j = 0; j < 6; j++) {
-				if (pSquares[i][j] == 2)
-					++x;
-				if (pSquares[i][j] == 1)
-					++o;
+		int x = 0, o = 0, last = 0;
+		for(int i = 0; i < 7; ++i) {
+			last = 0;
+			for(int j = 5; j > -1; --j) {
+				if (pSquares[i][j] == 2) {
+					if (last == 2) {
+						x += 5;
+						last = 0;
+					}
+					else {
+						last = 2;
+						++x;
+					}
+				}
+				else if (pSquares[i][j] == 1) {
+					if (last == 1) {
+						o += 5;
+						last = 0;
+					}
+					else {
+						last = 1;
+						++o;
+					}
+				}
+				else if (pSquares[i][j] == 3) {
+					if (last == 1) {
+						o += 3;
+						last = 0;
+					}
+					else if (last == 2) {
+						x += 3;
+						last = 0;
+					}
+					else last = 3;
+				}
+				else
+					last = 0;
 			}
 		}
-		return (o - x) / 42.0;
+		return (o - x) / 100.0;
 	}
 
 	// shows winning squares (used for debugging)
