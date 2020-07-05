@@ -2,22 +2,19 @@
 public class Board
 {
 	private int pieces[][];
-	private int pSquaresO[][];
-	private int pSquaresX[][];
+	private int pSquares[][];
 	
 	// constructor
 	public Board()
 	{
 		pieces = new int[7][6];
-		pSquaresO = new int[7][6];
-		pSquaresX = new int[7][6];
+		pSquares = new int[7][6];
 		for(int i = 0; i < 7; i++)
 		{
 			for(int j = 0; j < 6; j++)
 			{
 				pieces[i][j] = 0;
-				pSquaresO[i][j] = 0;
-				pSquaresX[i][j] = 0;
+				pSquares[i][j] = 0;
 			}
 		}
 	}
@@ -131,8 +128,7 @@ public class Board
 		{
 			for(int j2 = 0; j2 < 6; j2++)
 			{
-				pSquaresO[i][j2] = 0;
-				pSquaresX[i][j2] = 0;
+				pSquares[i][j2] = 0;
 			}
 		}
 		
@@ -173,10 +169,16 @@ public class Board
 					return(true);
 				if (pStreak == 4) {
 					if (pColor == 1) {
-						pSquaresO[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 1;
+						if (pSquares[pX][pY] == 2)
+							pSquares[pX][pY] = 3;
 					}
 					else {
-						pSquaresX[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 2;
+						if (pSquares[pX][pY] == 1)
+							pSquares[pX][pY] = 3;
 					}
 				}
 				j++;
@@ -250,10 +252,16 @@ public class Board
 					return(true);
 				if (pStreak == 4) {
 					if (pColor == 1) {
-						pSquaresO[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 1;
+						if (pSquares[pX][pY] == 2)
+							pSquares[pX][pY] = 3;
 					}
 					else {
-						pSquaresX[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 2;
+						if (pSquares[pX][pY] == 1)
+							pSquares[pX][pY] = 3;
 					}
 				}
 				++x;
@@ -304,10 +312,16 @@ public class Board
 					return(true);
 				if (pStreak == 4) {
 					if (pColor == 1) {
-						pSquaresO[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 1;
+						if (pSquares[pX][pY] == 2)
+							pSquares[pX][pY] = 3;
 					}
 					else {
-						pSquaresX[pX][pY] = 1;
+						if (pSquares[pX][pY] == 0)
+							pSquares[pX][pY] = 2;
+						if (pSquares[pX][pY] == 1)
+							pSquares[pX][pY] = 3;
 					}
 				}
 				--x;
@@ -322,11 +336,11 @@ public class Board
 	// ranking is dependent on the difference in winning squares
 	public double Rating() {
 		int x = 0, o = 0;
-		for(int i = 0; i < 6; i++) {
-			for(int j = 0; j < 7; j++) {
-				if (pSquaresX[j][i] == 1)
+		for(int i = 0; i < 7; i++) {
+			for(int j = 0; j < 6; j++) {
+				if (pSquares[i][j] == 2)
 					++x;
-				if (pSquaresO[j][i] == 1)
+				if (pSquares[i][j] == 1)
 					++o;
 			}
 		}
@@ -347,18 +361,14 @@ public class Board
 			s += "| ";
 			for(int j = 0; j < 7; j++)
 			{
-				if(pSquaresX[j][i] == pSquaresO[j][i]) {
-					if(pSquaresX[j][i] == 0)
-						s += "  ";
-					else
-						s += "B ";
-				}
-				else {
-					if(pSquaresX[j][i] == 0)
-						s += "O ";
-					else
-						s += "X ";
-				}
+				if(pSquares[j][i] == 0)
+					s += "  ";
+				else if(pSquares[j][i] == 1)
+					s += "O ";
+				else if(pSquares[j][i] == 2)
+					s += "X ";
+				else
+					s += "B ";
 			}
 			s += "|\n";
 		}

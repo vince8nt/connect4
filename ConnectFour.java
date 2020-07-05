@@ -28,7 +28,7 @@ public class ConnectFour
 					System.out.print("X's turn. what column would you like to drop into?: ");
 					nextCol = input.nextInt();
 					*/
-					nextCol = BestMove(b, 6) + 1;
+					nextCol = BestMove(b, 8) + 1;
 				}
 				if (nextCol == 0) {
 					b.Test();
