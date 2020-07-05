@@ -24,9 +24,16 @@ public class ConnectFour
 					nextCol = input.nextInt();
 				}
 				else {
-					// System.out.print("X's turn. what column would you like to drop into?: ");
+					/*
+					System.out.print("X's turn. what column would you like to drop into?: ");
+					nextCol = input.nextInt();
+					*/
 					nextCol = BestMove(b, 6) + 1;
 				}
+				if (nextCol == 0) {
+					b.Test();
+				}
+
 			}
 			b.drop(nextPiece, nextCol - 1);
 			
@@ -114,8 +121,6 @@ public class ConnectFour
 			}
 			return bestRating;
 		}
-
-		
 		return b.Rating();
 	}
 }
