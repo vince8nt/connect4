@@ -1,2 +1,3 @@
 # connect4
-two player connect four game printed in the console.
+Player vs computer connect-4.
+Features a recursive AI with depth 6.
