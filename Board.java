@@ -3,10 +3,12 @@ public class Board
 {
 	private int pieces[][];
 	private int pSquares[][];
+	private int cBias;
 	
 	// constructor
 	public Board()
 	{
+		cBias = 0;
 		pieces = new int[7][6];
 		pSquares = new int[7][6];
 		for(int i = 0; i < 7; i++)
@@ -186,25 +188,34 @@ public class Board
 		}
 		
 		// vertical 4?
+		int xBias = 0, oBias = 0;
 		for(int i = 0; i < 7; i++)
 		{
 			color = streak = j = 0;
 			while(j < 6)
 			{
-				if(this.pieces[i][j] == 0)
+				if(pieces[i][j] == 0)
 					color = streak = 0;
-				else if(this.pieces[i][j] == color)
+				else if(pieces[i][j] == color) {
 					streak++;
+				}
 				else
 				{
 					streak = 1;
-					color = this.pieces[i][j];
+					color = pieces[i][j];
 				}
 				if(streak == 4)
 					return(true);
+				if (color == 1) {
+					oBias += Math.abs(i - 3);
+				}
+				else if (color == 2) {
+					xBias += Math.abs(i - 3);
+				}
 				j++;
 			}
 		}
+		cBias = xBias - oBias;
 		
 		int x;
 		int y;
@@ -374,7 +385,7 @@ public class Board
 					last = 0;
 			}
 		}
-		return (o - x) / 100.0;
+		return (o - x) / 100.0 + cBias / 1000.0;
 	}
 
 	// shows winning squares (used for debugging)
@@ -404,6 +415,7 @@ public class Board
 		}
 		s += "+ - - - - - - - +\n";
 		s += "O is favored by: " + Rating() + "\n";
+		s += "center bias is " + cBias + "\n";
 		s += "-------------------------\n";
 		System.out.println(s);
 	}
