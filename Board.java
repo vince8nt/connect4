@@ -357,6 +357,8 @@ public class Board
 					}
 					else {
 						last = 2;
+						if (j % 2 == 0)
+							x += 2;
 						++x;
 					}
 				}
@@ -367,6 +369,8 @@ public class Board
 					}
 					else {
 						last = 1;
+						if (j % 2 == 1)
+							o += 2;
 						++o;
 					}
 				}
