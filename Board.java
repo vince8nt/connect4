@@ -414,8 +414,10 @@ public class Board
 			s += "|\n";
 		}
 		s += "+ - - - - - - - +\n";
-		s += "O is favored by: " + Rating() + "\n";
-		s += "center bias is " + cBias + "\n";
+		s += "O is favored by:\n";
+		s += "winning squares: " + (Rating() - (cBias / 1000.0)) + "\n";
+		s += "center bias: " + cBias + "\n";
+		s += "overall: " + Rating() + "\n";
 		s += "-------------------------\n";
 		System.out.println(s);
 	}
