@@ -9,6 +9,11 @@ public class ConnectFour
 		Board b = new Board();
 		int nextCol;
 		int nextPiece = 1;
+		int order = 0;
+		while(order < 1 || order > 2) {
+			System.out.print("Would you like to go first or second (1, 2): ");
+			order = input.nextInt();
+		}
 		
 		// main game loop
 		while(!b.full() && !b.win())
@@ -19,17 +24,15 @@ public class ConnectFour
 			// makes sure a valid column is chosen
 			while(nextCol < 1 || nextCol > 7 || b.colFull(nextCol - 1))
 			{
-				if(nextPiece == 1) {
+				
+				if (order == nextPiece) {
 					System.out.print("Your turn. what column would you like to drop into?: ");
 					nextCol = input.nextInt();
 				}
 				else {
-					/*
-					System.out.print("X's turn. what column would you like to drop into?: ");
-					nextCol = input.nextInt();
-					*/
 					nextCol = BestMove(b, 8, nextPiece) + 1;
 				}
+				
 				if (nextCol == 0) {
 					b.Test();
 				}
@@ -48,7 +51,7 @@ public class ConnectFour
 		// determine game outcome
 		if(b.win())
 		{
-			if(nextPiece == 1)
+			if(nextPiece == order)
 				System.out.println("You lost!");
 			else
 				System.out.println("You won!");
