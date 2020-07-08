@@ -65,6 +65,9 @@ public class ConnectFour
 	static int BestMove(Board b, int depth, int nextPiece){
 		double bestRating = 2;
 		int bestCol = -1;
+		if (nextPiece == 1) {
+			bestRating = -2;
+		}
 
 		if (b.full() || b.win()) {
 			throw new RuntimeException("no possible move");
