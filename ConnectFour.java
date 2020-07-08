@@ -28,7 +28,7 @@ public class ConnectFour
 					System.out.print("X's turn. what column would you like to drop into?: ");
 					nextCol = input.nextInt();
 					*/
-					nextCol = BestMove(b, 8) + 1;
+					nextCol = BestMove(b, 8, nextPiece) + 1;
 				}
 				if (nextCol == 0) {
 					b.Test();
@@ -59,7 +59,7 @@ public class ConnectFour
 		input.close();
 	}
 
-	static int BestMove(Board b, int depth){
+	static int BestMove(Board b, int depth, int nextPiece){
 		double bestRating = 2;
 		int bestCol = -1;
 
@@ -68,22 +68,39 @@ public class ConnectFour
 		}
 		for (int i = 0; i < 7; ++i) {
 			if (!b.colFull(i)) {
-				b.drop(2, i);
-				double cur = PosRating(b, depth - 1, 1);
-				if (cur < bestRating) {
-					bestRating = cur;
-					bestCol = i;
+				b.drop(nextPiece, i);
+				double cur;
+				if (nextPiece == 2)
+					cur = PosRating(b, depth - 1, 1);
+				else
+					cur = PosRating(b, depth - 1, 2);
+				if (nextPiece == 2) {
+					if (cur < bestRating) {
+						bestRating = cur;
+						bestCol = i;
+					}
+					b.remove(i);
+					if (bestRating == -1) {
+						return bestCol;
+					}
 				}
-				b.remove(i);
-				if (bestRating == -1) {
-					return bestCol;
+				else {
+					if (cur > bestRating) {
+						bestRating = cur;
+						bestCol = i;
+					}
+					b.remove(i);
+					if (bestRating == 1) {
+						return bestCol;
+					}
 				}
+				
 			}
 		}
 		return bestCol;
 	}
 
-	// 1 is a win for you, -1 is a win for the computer,
+	// 1 is a win for O, -1 is a win for X,
 	// in between is who is likely favored
 	static double PosRating(Board b, int depth, int nextPiece) {
 		double bestRating;
